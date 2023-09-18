@@ -2,25 +2,20 @@
     "name": "better-comments",
     "displayName": "Better Comments",
     "icon": "icon.png",
-    "description": "Improve your code commenting by annotating with alert, informational, TODOs, and more!",
+    "description": "Improve your code commenting by annotating with alert, informational, TODOs, and even custom tags!",
     "version": "3.0.2",
     "publisher": "aaron-bond",
     "author": {
         "name": "Aaron Bond"
     },
-    "homepage": "https://github.com/aaron-bond/better-comments/blob/master/README.md",
     "license": "SEE LICENSE IN LICENSE.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/aaron-bond/better-comments"
-    },
-    "sponsor": {
-        "url": "https://github.com/sponsors/aaron-bond"
-    },
-    "bugs": "https://github.com/aaron-bond/better-comments/issues",
     "categories": [
         "Formatters"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/private-extension-repo.git"
+    },
     "engines": {
         "vscode": "^1.65.0"
     },
@@ -66,7 +61,8 @@
                     "default": [
                         {
                             "tag": "!",
-                            "color": "#FF2D00",
+                            "darkModeColor": "#FF2D00",
+                            "lightModeColor": "#FF2D00",
                             "strikethrough": false,
                             "underline": false,
                             "backgroundColor": "transparent",
@@ -75,7 +71,8 @@
                         },
                         {
                             "tag": "?",
-                            "color": "#3498DB",
+                            "darkModeColor": "#3498DB",
+                            "lightModeColor": "#3498DB",
                             "strikethrough": false,
                             "underline": false,
                             "backgroundColor": "transparent",
@@ -84,7 +81,8 @@
                         },
                         {
                             "tag": "//",
-                            "color": "#474747",
+                            "lightModeColor": "#474747",
+                            "darkModeColor": "#dbdbdb",
                             "strikethrough": true,
                             "underline": false,
                             "backgroundColor": "transparent",
@@ -93,7 +91,8 @@
                         },
                         {
                             "tag": "todo",
-                            "color": "#FF8C00",
+                            "darkModeColor": "#FF8C00",
+                            "lightModeColor": "#FF8C00",
                             "strikethrough": false,
                             "underline": false,
                             "backgroundColor": "transparent",
@@ -102,7 +101,8 @@
                         },
                         {
                             "tag": "*",
-                            "color": "#98C379",
+                            "darkModeColor": "#98C379",
+                            "lightModeColor": "#98C379",
                             "strikethrough": false,
                             "underline": false,
                             "backgroundColor": "transparent",

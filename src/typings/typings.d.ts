@@ -11,12 +11,14 @@ interface Contributions {
     highlightPlainText: boolean;
     tags: [{
         tag: string;
-        color: string;
+        lightModeColor: string;
+        darkModeColor: string;
         strikethrough: boolean;
         underline: boolean;
         bold: boolean;
         italic: boolean;
-        backgroundColor: string;
+        lightModeBackgroundColor: string;
+        darkModeBackgroundColor: string;
     }];
 }
 

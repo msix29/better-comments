@@ -30,7 +30,7 @@ export class Parser {
 
     /**
      * Creates a new instance of the Parser class
-     * @param configuration 
+     * @param configuration
      */
     public constructor(config: Configuration) {
 
@@ -114,7 +114,7 @@ export class Parser {
 
         // If highlight multiline is off in package.json or doesn't apply to his language, return
         if (!this.highlightMultilineComments) return;
-        
+
         let text = activeEditor.document.getText();
 
         // Build up regex matcher for custom delimiter tags
@@ -259,7 +259,7 @@ export class Parser {
             case "tcl":
                 this.ignoreFirstLine = true;
                 break;
-            
+
             case "plaintext":
                 this.isPlainText = true;
 
@@ -274,8 +274,11 @@ export class Parser {
      */
     private setTags(): void {
         let items = this.contributions.tags;
+        const themeName = vscode.workspace.getConfiguration('workbench').get<string>('colorTheme');
+        const isLight = themeName? themeName.toLowerCase().includes('light'): false;
+
         for (let item of items) {
-            let options: vscode.DecorationRenderOptions = { color: item.color, backgroundColor: item.backgroundColor };
+            let options: vscode.DecorationRenderOptions = { color: isLight? item.lightModeColor: item.darkModeColor, backgroundColor: isLight? item.lightModeBackgroundColor: item.darkModeBackgroundColor };
 
             // ? the textDecoration is initialised to empty so we can concat a preceeding space on it
             options.textDecoration = "";
@@ -283,11 +286,11 @@ export class Parser {
             if (item.strikethrough) {
                 options.textDecoration += "line-through";
             }
-            
+
             if (item.underline) {
                 options.textDecoration += " underline";
             }
-            
+
             if (item.bold) {
                 options.fontWeight = "bold";
             }
