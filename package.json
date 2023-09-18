@@ -1,20 +1,21 @@
 {
-    "name": "better-comments",
-    "displayName": "Better Comments",
+    "name": "better-comments-edited",
+    "displayName": "Better Comments [Edited]",
     "icon": "icon.png",
     "description": "Improve your code commenting by annotating with alert, informational, TODOs, and even custom tags!",
     "version": "3.0.2",
-    "publisher": "aaron-bond",
+    "publisher": "msix29",
     "author": {
-        "name": "Aaron Bond"
+        "name": "Msix29"
     },
+    "output": "better-comments-edited",
     "license": "SEE LICENSE IN LICENSE.md",
     "categories": [
         "Formatters"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/yourusername/private-extension-repo.git"
+        "url": "https://github.com/msix29/better-comments"
     },
     "engines": {
         "vscode": "^1.65.0"
@@ -45,17 +46,17 @@
         "configuration": {
             "title": "Better Comments configuration",
             "properties": {
-                "better-comments.multilineComments": {
+                "better-comments-edited.multilineComments": {
                     "type": "boolean",
                     "description": "Whether the multiline comment highlighter should be active",
                     "default": true
                 },
-                "better-comments.highlightPlainText": {
+                "better-comments-edited.highlightPlainText": {
                     "type": "boolean",
                     "description": "Whether the plaintext comment highlighter should be active",
                     "default": false
                 },
-                "better-comments.tags": {
+                "better-comments-edited.tags": {
                     "type": "array",
                     "description": "Tags which are used to color the comments. Changes require a restart of VS Code to take effect",
                     "default": [

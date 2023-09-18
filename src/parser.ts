@@ -277,6 +277,8 @@ export class Parser {
         const themeName = vscode.workspace.getConfiguration('workbench').get<string>('colorTheme');
         const isLight = themeName? themeName.toLowerCase().includes('light'): false;
 
+        console.log(isLight)
+
         for (let item of items) {
             let options: vscode.DecorationRenderOptions = { color: isLight? item.lightModeColor: item.darkModeColor, backgroundColor: isLight? item.lightModeBackgroundColor: item.darkModeBackgroundColor };
 

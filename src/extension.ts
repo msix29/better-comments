@@ -6,6 +6,8 @@ import { Parser } from './parser';
 export async function activate(context: vscode.ExtensionContext) {
     let activeEditor: vscode.TextEditor;
 
+    console.log("Running.");
+
     let configuration: Configuration = new Configuration();
     let parser: Parser = new Parser(configuration);
 
