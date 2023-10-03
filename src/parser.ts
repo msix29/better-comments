@@ -23,7 +23,7 @@ export class Parser {
     public supportedLanguage = true;
 
     // Read from the package.json
-    private contributions: Contributions = vscode.workspace.getConfiguration('better-comments') as any;
+    private contributions: Contributions = vscode.workspace.getConfiguration('better-comments-edited') as any;
 
     // The configuration necessary to find supported languages on startup
     private configuration: Configuration;
@@ -37,6 +37,10 @@ export class Parser {
         this.configuration = config;
 
         this.setTags();
+    }
+
+    public onConfigUpdate() {
+        this.contributions = vscode.workspace.getConfiguration('better-comments-edited') as any;
     }
 
     /**
@@ -223,6 +227,52 @@ export class Parser {
         }
     }
 
+    /**
+     * Sets the highlighting tags up for use by the parser
+     */
+    public setTags(kind?: vscode.ColorThemeKind): void {
+        for (let tag of this.tags) {
+            tag.decoration.dispose()
+        }
+
+        this.tags = [];
+
+        let items = this.contributions.tags;
+        const themeName = vscode.workspace.getConfiguration('workbench').get<string>('colorTheme') || "Error getting theme.";
+        const isLight = !kind? themeName.toLowerCase().includes('light'): kind == vscode.ColorThemeKind.Light;
+
+        for (let item of items) {
+            let options: vscode.DecorationRenderOptions = { color: isLight? item.lightModeColor: item.darkModeColor, backgroundColor: isLight? item.lightModeBackgroundColor: item.darkModeBackgroundColor };
+
+            // ? the textDecoration is initialised to empty so we can concat a preceeding space on it
+            options.textDecoration = "";
+
+            if (item.strikethrough) {
+                options.textDecoration += "line-through";
+            }
+
+            if (item.underline) {
+                options.textDecoration += " underline";
+            }
+
+            if (item.bold) {
+                options.fontWeight = "bold";
+            }
+
+            if (item.italic) {
+                options.fontStyle = "italic";
+            }
+
+            let escapedSequence = item.tag.replace(/([()[{*+.$^\\|?])/g, '\\$1');
+            this.tags.push({
+                tag: item.tag,
+                escapedTag: escapedSequence.replace(/\//gi, "\\/"), // ! hardcoded to escape slashes
+                ranges: [],
+                decoration: vscode.window.createTextEditorDecorationType(options)
+            });
+        }
+    }
+
     //#region  Private Methods
 
     /**
@@ -266,48 +316,6 @@ export class Parser {
                 // If highlight plaintext is enabled, this is a supported language
                 this.supportedLanguage = this.contributions.highlightPlainText;
                 break;
-        }
-    }
-
-    /**
-     * Sets the highlighting tags up for use by the parser
-     */
-    private setTags(): void {
-        let items = this.contributions.tags;
-        const themeName = vscode.workspace.getConfiguration('workbench').get<string>('colorTheme');
-        const isLight = themeName? themeName.toLowerCase().includes('light'): false;
-
-        console.log(isLight)
-
-        for (let item of items) {
-            let options: vscode.DecorationRenderOptions = { color: isLight? item.lightModeColor: item.darkModeColor, backgroundColor: isLight? item.lightModeBackgroundColor: item.darkModeBackgroundColor };
-
-            // ? the textDecoration is initialised to empty so we can concat a preceeding space on it
-            options.textDecoration = "";
-
-            if (item.strikethrough) {
-                options.textDecoration += "line-through";
-            }
-
-            if (item.underline) {
-                options.textDecoration += " underline";
-            }
-
-            if (item.bold) {
-                options.fontWeight = "bold";
-            }
-
-            if (item.italic) {
-                options.fontStyle = "italic";
-            }
-
-            let escapedSequence = item.tag.replace(/([()[{*+.$^\\|?])/g, '\\$1');
-            this.tags.push({
-                tag: item.tag,
-                escapedTag: escapedSequence.replace(/\//gi, "\\/"), // ! hardcoded to escape slashes
-                ranges: [],
-                decoration: vscode.window.createTextEditorDecorationType(options)
-            });
         }
     }
 

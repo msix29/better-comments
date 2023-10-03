@@ -11,6 +11,7 @@ interface Contributions {
     highlightPlainText: boolean;
     tags: [{
         tag: string;
+        color: string;
         lightModeColor: string;
         darkModeColor: string;
         strikethrough: boolean;

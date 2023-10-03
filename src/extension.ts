@@ -6,8 +6,6 @@ import { Parser } from './parser';
 export async function activate(context: vscode.ExtensionContext) {
     let activeEditor: vscode.TextEditor;
 
-    console.log("Running.");
-
     let configuration: Configuration = new Configuration();
     let parser: Parser = new Parser(configuration);
 
@@ -40,8 +38,23 @@ export async function activate(context: vscode.ExtensionContext) {
         await parser.SetRegex(activeEditor.document.languageId);
 
         // Trigger first update of decorators
-        triggerUpdateDecorations();
+        triggerUpdateDecorations(true);
     }
+
+    const themeChangeDisposable = vscode.window.onDidChangeActiveColorTheme((theme) => {
+        parser.setTags(theme.kind);
+        triggerUpdateDecorations(false);
+    });
+    const configChangeDisposable = vscode.workspace.onDidChangeConfiguration((event) => {
+        if (event.affectsConfiguration('better-comments-edited')) {
+            parser.onConfigUpdate();
+            triggerUpdateDecorations(true)
+        }
+    });
+
+    // Register the disposables so they get cleaned up when the extension is deactivated
+    context.subscriptions.push(configChangeDisposable);
+    context.subscriptions.push(themeChangeDisposable);
 
     // * Handle extensions being added or removed
     vscode.extensions.onDidChange(() => {
@@ -57,7 +70,7 @@ export async function activate(context: vscode.ExtensionContext) {
             await parser.SetRegex(editor.document.languageId);
 
             // Trigger update to set decorations for newly active file
-            triggerUpdateDecorations();
+            triggerUpdateDecorations(true);
         }
     }, null, context.subscriptions);
 
@@ -66,7 +79,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
         // Trigger updates if the text was changed in the same document
         if (activeEditor && event.document === activeEditor.document) {
-            triggerUpdateDecorations();
+            triggerUpdateDecorations(false);
         }
     }, null, context.subscriptions);
 
@@ -74,9 +87,12 @@ export async function activate(context: vscode.ExtensionContext) {
     // * To avoid calling update too often,
     // * set a timer for 100ms to wait before updating decorations
     var timeout: NodeJS.Timer;
-    function triggerUpdateDecorations() {
+    function triggerUpdateDecorations(update: boolean) {
         if (timeout) {
             clearTimeout(timeout);
+        }
+        if (update) {
+            parser.setTags();
         }
         timeout = setTimeout(updateDecorations, 100);
     }

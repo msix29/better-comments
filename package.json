@@ -2,21 +2,24 @@
     "name": "better-comments-edited",
     "displayName": "Better Comments [Edited]",
     "icon": "icon.png",
-    "description": "Improve your code commenting by annotating with alert, informational, TODOs, and even custom tags!",
+    "description": "Improve your code commenting by annotating with alert, informational, TODOs, and more!",
     "version": "3.0.2",
     "publisher": "msix29",
     "author": {
         "name": "Msix29"
     },
-    "output": "better-comments-edited",
+    "homepage": "https://github.com/msix29/better-comments/blob/master/README.md",
     "license": "SEE LICENSE IN LICENSE.md",
-    "categories": [
-        "Formatters"
-    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/msix29/better-comments"
     },
+    "sponsor": {
+        "url": "https://github.com/sponsors/aaron-bond"
+    },
+    "categories": [
+        "Formatters"
+    ],
     "engines": {
         "vscode": "^1.65.0"
     },
@@ -66,7 +69,8 @@
                             "lightModeColor": "#FF2D00",
                             "strikethrough": false,
                             "underline": false,
-                            "backgroundColor": "transparent",
+                            "lightModeBackgroundColor": "transparent",
+                            "darkModeBackgroundColor": "transparent",
                             "bold": false,
                             "italic": false
                         },
@@ -76,7 +80,8 @@
                             "lightModeColor": "#3498DB",
                             "strikethrough": false,
                             "underline": false,
-                            "backgroundColor": "transparent",
+                            "lightModeBackgroundColor": "transparent",
+                            "darkModeBackgroundColor": "transparent",
                             "bold": false,
                             "italic": false
                         },
@@ -86,18 +91,20 @@
                             "darkModeColor": "#dbdbdb",
                             "strikethrough": true,
                             "underline": false,
-                            "backgroundColor": "transparent",
+                            "lightModeBackgroundColor": "transparent",
+                            "darkModeBackgroundColor": "transparent",
                             "bold": false,
                             "italic": false
                         },
                         {
                             "tag": "todo",
-                            "darkModeColor": "#FF8C00",
-                            "lightModeColor": "#FF8C00",
+                            "darkModeColor": "#FFFFFF",
+                            "lightModeColor": "#000000",
                             "strikethrough": false,
                             "underline": false,
-                            "backgroundColor": "transparent",
-                            "bold": false,
+                            "lightModeBackgroundColor": "transparent",
+                            "darkModeBackgroundColor": "transparent",
+                            "bold": true,
                             "italic": false
                         },
                         {
@@ -106,7 +113,8 @@
                             "lightModeColor": "#98C379",
                             "strikethrough": false,
                             "underline": false,
-                            "backgroundColor": "transparent",
+                            "lightModeBackgroundColor": "transparent",
+                            "darkModeBackgroundColor": "transparent",
                             "bold": false,
                             "italic": false
                         }
