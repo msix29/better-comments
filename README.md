@@ -2,6 +2,7 @@
 
 The Better Comments extension will help you create more human-friendly comments in your code.
 With this extension, you will be able to categorise your annotations into:
+
 * Alerts
 * Queries
 * TODOs
@@ -29,56 +30,61 @@ The default 5 can be modified to change the colors, and more can be added.
 
 ```json
 "better-comments-edited.tags": [
-  {
+{
     "tag": "!",
     "darkModeColor": "#FF2D00",
     "lightModeColor": "#FF2D00",
     "strikethrough": false,
     "underline": false,
-    "backgroundColor": "transparent",
+    "lightModeBackgroundColor": "transparent",
+    "darkModeBackgroundColor": "transparent",
     "bold": false,
     "italic": false
-  },
-  {
+},
+{
     "tag": "?",
     "darkModeColor": "#3498DB",
     "lightModeColor": "#3498DB",
     "strikethrough": false,
     "underline": false,
-    "backgroundColor": "transparent",
+    "lightModeBackgroundColor": "transparent",
+    "darkModeBackgroundColor": "transparent",
     "bold": false,
     "italic": false
-  },
-  {
+},
+{
     "tag": "//",
     "lightModeColor": "#474747",
     "darkModeColor": "#dbdbdb",
     "strikethrough": true,
     "underline": false,
-    "backgroundColor": "transparent",
+    "lightModeBackgroundColor": "transparent",
+    "darkModeBackgroundColor": "transparent",
     "bold": false,
     "italic": false
-  },
-  {
+},
+{
     "tag": "todo",
-    "darkModeColor": "#FF8C00",
-    "lightModeColor": "#FF8C00",
+    "darkModeColor": "#FFFFFF",
+    "lightModeColor": "#000000",
     "strikethrough": false,
     "underline": false,
-    "backgroundColor": "transparent",
-    "bold": false,
+    "lightModeBackgroundColor": "transparent",
+    "darkModeBackgroundColor": "transparent",
+    "bold": true,
     "italic": false
-  },
-  {
+},
+{
     "tag": "*",
     "darkModeColor": "#98C379",
     "lightModeColor": "#98C379",
     "strikethrough": false,
     "underline": false,
-    "backgroundColor": "transparent",
+    "lightModeBackgroundColor": "transparent",
+    "darkModeBackgroundColor": "transparent",
     "bold": false,
     "italic": false
-  }
+}
 ]
 ```
 
